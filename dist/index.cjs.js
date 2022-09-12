@@ -8,7 +8,6 @@ var path = require('path');
 var fs = require('fs');
 var postcss = require('postcss');
 var babel = require('@babel/parser');
-var vue = require('vue');
 
 function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
 
@@ -330,44 +329,7 @@ function vitePluginCode(opts = {}) {
     };
 }
 
-/**
- * 使用弹窗-vue3/vue2.7+
- * @param file 单文件组件
- * @param opts 参数
- * @example
- * ```js
- * //主动关闭弹窗
- * this.$close();
- * ```
- */
-function useDialog(file, opts) {
-    // @ts-ignore
-    // let ins: any = getCurrentInstance() || this;
-    return new Promise((resolve, reject) => {
-        // 服务器渲染
-        if (typeof document !== "undefined") {
-            try {
-                let container = document.createElement("div");
-                let app = vue.createVNode(file, {});
-                // app.appContext = Object.assign({}, ins.appContext.app._context);
-                app.appContext.$close = (result = true) => {
-                    // 销毁组件
-                    vue.render(null, container);
-                    container.parentNode?.removeChild(container);
-                    resolve(result);
-                };
-                vue.render(app, container);
-                document.body.appendChild(container);
-            }
-            catch (error) {
-                console.log(error);
-            }
-        }
-    });
-}
-
 exports.mdCode = mdCode;
 exports.mdImage = mdImage;
-exports.useDialog = useDialog;
 exports.vitePluginCode = vitePluginCode;
 exports.vitePluginMacros = vitePluginMacros;

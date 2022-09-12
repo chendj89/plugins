@@ -1,5 +1,4 @@
 import { createVNode, render } from "vue";
-
 declare const document: any;
 
 /**

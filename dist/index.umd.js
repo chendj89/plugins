@@ -1,8 +1,8 @@
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@vue/compiler-sfc'), require('vite'), require('path'), require('fs'), require('postcss'), require('@babel/parser'), require('vue')) :
-    typeof define === 'function' && define.amd ? define(['exports', '@vue/compiler-sfc', 'vite', 'path', 'fs', 'postcss', '@babel/parser', 'vue'], factory) :
-    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory(global.index = {}, global.compilerSfc, global.vite, global.path, global.fs, global.postcss, global.babel, global.vue));
-})(this, (function (exports, compilerSfc, vite, path, fs, postcss, babel, vue) { 'use strict';
+    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@vue/compiler-sfc'), require('vite'), require('path'), require('fs'), require('postcss'), require('@babel/parser')) :
+    typeof define === 'function' && define.amd ? define(['exports', '@vue/compiler-sfc', 'vite', 'path', 'fs', 'postcss', '@babel/parser'], factory) :
+    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory(global.index = {}, global.compilerSfc, global.vite, global.path, global.fs, global.postcss, global.babel));
+})(this, (function (exports, compilerSfc, vite, path, fs, postcss, babel) { 'use strict';
 
     function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
 
@@ -324,45 +324,8 @@ ${tpl.join(";\n")}
         };
     }
 
-    /**
-     * 使用弹窗-vue3/vue2.7+
-     * @param file 单文件组件
-     * @param opts 参数
-     * @example
-     * ```js
-     * //主动关闭弹窗
-     * this.$close();
-     * ```
-     */
-    function useDialog(file, opts) {
-        // @ts-ignore
-        // let ins: any = getCurrentInstance() || this;
-        return new Promise((resolve, reject) => {
-            // 服务器渲染
-            if (typeof document !== "undefined") {
-                try {
-                    let container = document.createElement("div");
-                    let app = vue.createVNode(file, {});
-                    // app.appContext = Object.assign({}, ins.appContext.app._context);
-                    app.appContext.$close = (result = true) => {
-                        // 销毁组件
-                        vue.render(null, container);
-                        container.parentNode?.removeChild(container);
-                        resolve(result);
-                    };
-                    vue.render(app, container);
-                    document.body.appendChild(container);
-                }
-                catch (error) {
-                    console.log(error);
-                }
-            }
-        });
-    }
-
     exports.mdCode = mdCode;
     exports.mdImage = mdImage;
-    exports.useDialog = useDialog;
     exports.vitePluginCode = vitePluginCode;
     exports.vitePluginMacros = vitePluginMacros;
 

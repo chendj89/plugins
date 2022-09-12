@@ -4,7 +4,6 @@ import * as path from 'path';
 import * as fs from 'fs';
 import postcss from 'postcss';
 import * as babel from '@babel/parser';
-import { createVNode, render } from 'vue';
 
 /**
  * 扩展md功能,让md支持图片样式
@@ -301,40 +300,4 @@ function vitePluginCode(opts = {}) {
     };
 }
 
-/**
- * 使用弹窗-vue3/vue2.7+
- * @param file 单文件组件
- * @param opts 参数
- * @example
- * ```js
- * //主动关闭弹窗
- * this.$close();
- * ```
- */
-function useDialog(file, opts) {
-    // @ts-ignore
-    // let ins: any = getCurrentInstance() || this;
-    return new Promise((resolve, reject) => {
-        // 服务器渲染
-        if (typeof document !== "undefined") {
-            try {
-                let container = document.createElement("div");
-                let app = createVNode(file, {});
-                // app.appContext = Object.assign({}, ins.appContext.app._context);
-                app.appContext.$close = (result = true) => {
-                    // 销毁组件
-                    render(null, container);
-                    container.parentNode?.removeChild(container);
-                    resolve(result);
-                };
-                render(app, container);
-                document.body.appendChild(container);
-            }
-            catch (error) {
-                console.log(error);
-            }
-        }
-    });
-}
-
-export { mdCode, mdImage, useDialog, vitePluginCode, vitePluginMacros };
+export { mdCode, mdImage, vitePluginCode, vitePluginMacros };
