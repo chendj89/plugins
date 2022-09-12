@@ -1,5 +1,5 @@
 {
-  "name": "@chencc/plugin",
+  "name": "@chencc/plugins",
   "version": "1.0.0",
   "description": "",
   "scripts": {
@@ -37,5 +37,13 @@
       "import": "./dist/index.es.js",
       "require": "./dist/index.umd.js"
     }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/chendj89/plugins.git"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
   }
 }
