@@ -1,1 +1,1 @@
-export { default as useDialog } from "./useDialog";
+export { useDialog } from "./useDialog";

@@ -11,7 +11,7 @@ declare const document: any;
  * this.$close();
  * ```
  */
-export default function useDialog(file: any, opts?: any) {
+export function useDialog(file: any, opts?: any) {
   // @ts-ignore
   let ins: any = getCurrentInstance() || this;
   return new Promise((resolve, reject) => {
