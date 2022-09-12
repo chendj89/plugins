@@ -1,4 +1,4 @@
-import { createVNode, render } from "vue";
+import { createVNode, render, getCurrentInstance } from "vue";
 declare const document: any;
 
 /**
@@ -13,14 +13,14 @@ declare const document: any;
  */
 export default function useDialog(file: any, opts?: any) {
   // @ts-ignore
-  // let ins: any = getCurrentInstance() || this;
+  let ins: any = getCurrentInstance() || this;
   return new Promise((resolve, reject) => {
     // 服务器渲染
     if (typeof document !== "undefined") {
       try {
         let container = document.createElement("div");
         let app: any = createVNode(file, {});
-        // app.appContext = Object.assign({}, ins.appContext.app._context);
+        app.appContext = Object.assign({}, ins.appContext.app._context);
         app.appContext.$close = (result: any = true) => {
           // 销毁组件
           render(null, container);

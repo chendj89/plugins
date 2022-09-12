@@ -1,6 +1,6 @@
 {
   "name": "@chencc/plugins",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "",
   "scripts": {
     "peers": "cnpm i -D && npm-install-peers",

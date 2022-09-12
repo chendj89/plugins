@@ -1,4 +1,4 @@
-import { createVNode, render } from 'vue';
+import { getCurrentInstance, createVNode, render } from 'vue';
 
 /**
  * 使用弹窗-vue3/vue2.7+
@@ -12,14 +12,14 @@ import { createVNode, render } from 'vue';
  */
 function useDialog(file, opts) {
     // @ts-ignore
-    // let ins: any = getCurrentInstance() || this;
+    let ins = getCurrentInstance() || this;
     return new Promise((resolve, reject) => {
         // 服务器渲染
         if (typeof document !== "undefined") {
             try {
                 let container = document.createElement("div");
                 let app = createVNode(file, {});
-                // app.appContext = Object.assign({}, ins.appContext.app._context);
+                app.appContext = Object.assign({}, ins.appContext.app._context);
                 app.appContext.$close = (result = true) => {
                     // 销毁组件
                     render(null, container);

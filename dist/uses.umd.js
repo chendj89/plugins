@@ -16,14 +16,14 @@
      */
     function useDialog(file, opts) {
         // @ts-ignore
-        // let ins: any = getCurrentInstance() || this;
+        let ins = vue.getCurrentInstance() || this;
         return new Promise((resolve, reject) => {
             // 服务器渲染
             if (typeof document !== "undefined") {
                 try {
                     let container = document.createElement("div");
                     let app = vue.createVNode(file, {});
-                    // app.appContext = Object.assign({}, ins.appContext.app._context);
+                    app.appContext = Object.assign({}, ins.appContext.app._context);
                     app.appContext.$close = (result = true) => {
                         // 销毁组件
                         vue.render(null, container);
