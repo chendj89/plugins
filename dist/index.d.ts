@@ -1,4 +1,4 @@
-import { Plugin } from "vite";
+import { Plugin } from 'vite';
 
 /**
  * 扩展md功能,让md支持图片样式
@@ -25,5 +25,6 @@ declare function vitePluginMacros(opts?: any): Plugin;
  * @returns
  */
 declare function vitePluginCode(opts?: any): Plugin;
-import "./uses";
+
 export { mdCode, mdImage, vitePluginCode, vitePluginMacros };
+import "./uses/index";
