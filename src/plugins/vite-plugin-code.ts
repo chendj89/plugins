@@ -152,6 +152,11 @@ function transformJs(info: any) {
   }
   return content;
 }
+/**
+ * 支持md，导入代码
+ * @param opts
+ * @returns
+ */
 export default function vitePluginCode(opts: any = {}): Plugin {
   return {
     name: "vitePluginCode",
