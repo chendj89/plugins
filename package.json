@@ -1,6 +1,6 @@
 {
   "name": "@chencc/plugins",
-  "version": "1.0.5",
+  "version": "1.0.7",
   "description": "",
   "scripts": {
     "peers": "cnpm i -D && npm-install-peers",
@@ -37,7 +37,8 @@
     ".": {
       "import": "./dist/index.es.js",
       "require": "./dist/index.umd.js"
-    }
+    },
+    "./uses": "./dist/uses.es.js"
   },
   "repository": {
     "type": "git",
