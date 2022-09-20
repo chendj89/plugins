@@ -1,48 +1,25 @@
-import typescript from "@rollup/plugin-typescript";
-import dts from "rollup-plugin-dts";
+// import common from "@rollup/plugin-commonjs";
+// import resolve from "@rollup/plugin-node-resolve";
+import typescript from "rollup-plugin-typescript2";
 export default [
   {
-    input: "./src/index.ts",
+    input: "src/index.ts",
+    output: {
+      file: "dist/index.js",
+      format: "cjs",
+    },
+    plugins: [ typescript()],
+    external: ["vite", "cheerio","http"],
+  },
+  {
+    input: "src/index.ts",
     output: [
       {
-        file: "dist/index.umd.js",
-        format: "umd",
-        name: "index",
+        file: "dist/index.mjs",
+        format: "esm",
       },
-      { file: "dist/index.es.js", name: "index", format: "es" },
-      { file: "dist/index.cjs.js", name: "index", format: "cjs" },
     ],
-    plugins: [typescript({ compilerOptions: { lib: ["esnext"] } })],
-    watch: {
-      include: "src/**",
-      exclude: "node_modules/**",
-    },
-  },
-  {
-    input: "./src/uses/index.ts",
-    output: [
-      {
-        file: "dist/uses/index.umd.js",
-        format: "umd",
-        name: "uses",
-      },
-      { file: "dist/uses/index.es.js", name: "uses", format: "es" },
-      { file: "dist/uses/index.cjs.js", name: "uses", format: "cjs" },
-    ],
-    plugins: [typescript({ compilerOptions: { lib: ["esnext"] } })],
-    watch: {
-      include: "src/**",
-      exclude: "node_modules/**",
-    },
-  },
-  {
-    input: "./src/index.ts",
-    output: [{ file: `dist/index.d.ts`, format: "esm" }],
-    plugins: [dts()],
-  },
-  {
-    input: "./src/uses/index.ts",
-    output: [{ file: `dist/uses/index.d.ts`, format: "esm" }],
-    plugins: [dts()],
+    plugins: [ typescript()],
+    external: ["vite", "cheerio","http"],
   },
 ];
